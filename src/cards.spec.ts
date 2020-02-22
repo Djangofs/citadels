@@ -1,4 +1,4 @@
-import { newRound } from './cards';
+import { newRound, removeCardFromDealtCards } from './cards';
 import { CharacterDeck, Character } from './cards.types';
 
 const reducer = (accumulator: number, currentValue: any[]): number =>
@@ -40,5 +40,55 @@ describe('Function: newRound', () => {
     } catch (err) {
       expect(err.message).toBe('invalid number of players');
     }
+  });
+});
+
+describe('Function: removeCardFromDealtCards', () => {
+  const dealtCards = [
+    {
+      name: 'Assassin',
+      rank: 1,
+      description: 'Kill someone',
+    },
+    {
+      name: 'Thief',
+      rank: 2,
+      description: 'Steal gold',
+    },
+    {
+      name: 'Magician',
+      rank: 3,
+      description: 'Swap cards',
+    },
+  ];
+  test('should throw an error is invalid card is given', () => {
+    try {
+      removeCardFromDealtCards(5, dealtCards);
+    } catch (err) {
+      expect(err.message).toBe(
+        'could not find card, player has selected invalid option'
+      );
+    }
+  });
+
+  test('should return card and new dealtCards', () => {
+    const [card, newDealtCards] = removeCardFromDealtCards(1, dealtCards);
+    expect(card).toEqual({
+      name: 'Assassin',
+      rank: 1,
+      description: 'Kill someone',
+    });
+    expect(newDealtCards).toEqual([
+      {
+        name: 'Thief',
+        rank: 2,
+        description: 'Steal gold',
+      },
+      {
+        name: 'Magician',
+        rank: 3,
+        description: 'Swap cards',
+      },
+    ]);
   });
 });
