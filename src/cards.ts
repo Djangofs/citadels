@@ -1,4 +1,5 @@
-import { CharacterDeck } from './cards.types';
+import { CharacterDeck, Character } from './cards.types';
+import { characters } from './characters';
 
 const FaceUpLookup = {
   Four: 2,
@@ -9,13 +10,12 @@ const FaceUpLookup = {
 
 const isValidNumberOfPlayers = (
   players: string
-): players is keyof typeof FaceUpLookup => {
-  return players in FaceUpLookup;
-};
+): players is keyof typeof FaceUpLookup => players in FaceUpLookup;
 
+// TODO: Better way of determining number of cards from number of players
 export const newRound = (players: string): CharacterDeck => {
   if (isValidNumberOfPlayers(players)) {
-    const toDeal = [1, 2, 3, 4, 5, 6, 7, 8];
+    const toDeal = characters.map(a => Object.assign({}, a));
 
     const faceDown = toDeal.splice(
       Math.floor(Math.random() * toDeal.length),
@@ -35,3 +35,5 @@ export const newRound = (players: string): CharacterDeck => {
   }
   throw Error('invalid number of players');
 };
+
+export const selectCard = (dealtCards: Character[]) => {};

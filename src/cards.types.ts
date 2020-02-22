@@ -1,5 +1,11 @@
+export type Character = {
+  name: string;
+  rank: number;
+  description: string;
+};
+
 export type CharacterDeck = {
-  faceUp: number[];
-  faceDown: number[];
-  dealt: number[];
+  faceUp: Character[];
+  faceDown: Character[];
+  dealt: Character[];
 };

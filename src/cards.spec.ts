@@ -1,13 +1,13 @@
 import { newRound } from './cards';
-import { CharacterDeck } from './cards.types';
+import { CharacterDeck, Character } from './cards.types';
 
-const reducer = (accumulator: number, currentValue: number[]): number =>
+const reducer = (accumulator: number, currentValue: any[]): number =>
   accumulator + currentValue.length;
 
 describe('Function: newRound', () => {
   test('should always return total array of 8', () => {
     const response: CharacterDeck = newRound('Four');
-    const values: number[][] = Object.values(response);
+    const values: Character[][] = Object.values(response);
     const sum = values.reduce(reducer, 0);
     expect(sum).toBe(8);
   });
