@@ -1,5 +1,5 @@
 import { newRound, removeCardFromDealtCards } from './cards';
-import { CharacterDeck, Character } from './cards.types';
+import { CharacterDeck, Character } from '../types/cards.types';
 
 const reducer = (accumulator: number, currentValue: any[]): number =>
   accumulator + currentValue.length;

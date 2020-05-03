@@ -1,4 +1,4 @@
-import { Character } from './cards.types';
+import { Character } from '../types/cards.types';
 
 export const characters: Character[] = [
   {

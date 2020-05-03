@@ -1,5 +1,5 @@
-import { CharacterDeck, Character } from './cards.types';
-import { characters } from './characters';
+import { CharacterDeck, Character } from '../types/cards.types';
+import { characters } from '../data/characters';
 
 const copyArrayOfObjects = <T>(array: T[]): T[] =>
   array.map(a => Object.assign({}, a));
