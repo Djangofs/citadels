@@ -11,8 +11,8 @@ export const typeDefs = gql`
 
 export const resolvers = {
   Query: {
-    user: () => ({
-      name: 'Django',
-    }),
+    user: () => {
+      return { name: 'Django' };
+    },
   },
 };
