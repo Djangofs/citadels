@@ -4,6 +4,8 @@ import { useQuery } from '@apollo/react-hooks';
 import logo from './logo.svg';
 import './App.css';
 
+import NameInput from './components/nameInput';
+
 const GET_USER = gql`
   query {
     user {
@@ -21,7 +23,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Welcome to Citadels!</p>
-        <p>Hello {data.user.name}</p>
+        <NameInput />
       </header>
     </div>
   );
