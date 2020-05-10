@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import { NameInput, Button } from './styled';
+
+const ADD_USER = gql`
+  mutation AddUser($name: String!) {
+    addUser(name: $name) {
+      name
+    }
+  }
+`;
 
 export default function () {
   const [name, setName] = useState('');
+  const [addUser, { loading, error, data }] = useMutation(ADD_USER);
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>): void => {
     evt.preventDefault();
-    alert(`Submitting Name ${name}`);
+    console.log(`Submitting Name ${name}`);
+    addUser({ variables: { name } });
   };
 
   return (
@@ -21,6 +33,9 @@ export default function () {
       <div>
         <Button type="submit">Submit</Button>
       </div>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error please try again</p>}
+      {data && <p>Response: {data.addUser.name} </p>}
     </form>
   );
 }

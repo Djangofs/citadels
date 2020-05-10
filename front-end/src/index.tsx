@@ -7,7 +7,10 @@ import App from './App';
 
 import * as serviceWorker from './serviceWorker';
 
-const client = new ApolloClient({ uri: 'http://localhost:3000/graphql' });
+const client = new ApolloClient({
+  uri: 'http://localhost:3000/graphql',
+  credentials: 'include',
+});
 
 ReactDOM.render(
   <React.StrictMode>

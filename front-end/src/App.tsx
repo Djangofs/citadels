@@ -18,11 +18,13 @@ function App() {
   const { loading, error, data } = useQuery(GET_USER);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error :(</div>;
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Welcome to Citadels!</p>
+        {data && <p>{data.user.name} </p>}
         <NameInput />
       </header>
     </div>
