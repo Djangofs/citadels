@@ -1,23 +1,41 @@
 import { gql } from 'apollo-server-koa';
 interface CitadelsContext {
   session: {
-    name: String;
+    name: string;
   };
 }
-interface addUserArgs {
-  name: String;
+interface AddUserArgs {
+  name: string;
 }
 
-interface addUserResponse {
-  name: String;
+interface AddUserResponse {
+  name: string;
+}
+
+interface Game {
+  name: string;
+  playerLimit: number;
+  players: number;
+  ruleset: string;
+  open: boolean;
 }
 
 export const typeDefs = gql`
   type User {
     name: String
   }
+
+  type Games {
+    name: String
+    playerLimit: Int
+    players: Int
+    ruleset: String
+    open: Boolean
+  }
+
   type Query {
     user: User
+    games: [Games]
   }
   type Mutation {
     addUser(name: String): User
@@ -29,13 +47,31 @@ export const resolvers = {
     user: (parent: {}, args: {}, ctx: CitadelsContext) => {
       return { name: ctx.session.name || '' };
     },
+    games: (): Game[] => {
+      return [
+        {
+          name: 'Game 1',
+          playerLimit: 8,
+          players: 4,
+          ruleset: 'Standard',
+          open: true,
+        },
+        {
+          name: 'Game 2',
+          playerLimit: 4,
+          players: 4,
+          ruleset: 'Standard',
+          open: true,
+        },
+      ];
+    },
   },
   Mutation: {
     addUser: (
       parent: any,
-      args: addUserArgs,
+      args: AddUserArgs,
       ctx: CitadelsContext
-    ): addUserResponse => {
+    ): AddUserResponse => {
       ctx.session.name = args.name;
       return { name: ctx.session.name || '' };
     },
