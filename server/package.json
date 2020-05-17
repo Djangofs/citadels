@@ -7,7 +7,8 @@
     "start": "nodemon",
     "test": "jest",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-    "format": ""
+    "format": "",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-typescript": "^7.8.3",
     "@babel/types": "^7.8.3",
+    "@graphql-codegen/cli": "1.13.5",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.4",
     "@types/react": "^16.9.34",
@@ -30,7 +32,10 @@
     "jest": "^25.1.0",
     "nodemon": "^2.0.3",
     "prettier": "^1.19.1",
-    "ts-node": "^8.10.1"
+    "ts-node": "^8.10.1",
+    "@graphql-codegen/typescript": "1.13.5",
+    "@graphql-codegen/typescript-resolvers": "1.13.5",
+    "@graphql-codegen/introspection": "1.13.5"
   },
   "dependencies": {
     "@types/koa": "^2.11.3",
@@ -41,6 +46,7 @@
     "@types/koa-session": "^5.10.2",
     "@types/koa-static": "^4.0.1",
     "apollo-server-koa": "^2.12.0",
+    "graphql-import": "^1.0.2",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
     "koa-cors": "0.0.16",

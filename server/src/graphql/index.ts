@@ -1,46 +1,12 @@
-import { gql } from 'apollo-server-koa';
+import { importSchema } from 'graphql-import';
+import { Game, User, MutationAddUserArgs } from './types';
 interface CitadelsContext {
   session: {
     name: string;
   };
 }
-interface AddUserArgs {
-  name: string;
-}
 
-interface AddUserResponse {
-  name: string;
-}
-
-interface Game {
-  name: string;
-  playerLimit: number;
-  players: number;
-  ruleset: string;
-  open: boolean;
-}
-
-export const typeDefs = gql`
-  type User {
-    name: String
-  }
-
-  type Games {
-    name: String
-    playerLimit: Int
-    players: Int
-    ruleset: String
-    open: Boolean
-  }
-
-  type Query {
-    user: User
-    games: [Games]
-  }
-  type Mutation {
-    addUser(name: String): User
-  }
-`;
+export const typeDefs = importSchema('**/*.graphql');
 
 export const resolvers = {
   Query: {
@@ -69,9 +35,9 @@ export const resolvers = {
   Mutation: {
     addUser: (
       parent: any,
-      args: AddUserArgs,
+      args: MutationAddUserArgs,
       ctx: CitadelsContext
-    ): AddUserResponse => {
+    ): User => {
       ctx.session.name = args.name;
       return { name: ctx.session.name || '' };
     },
