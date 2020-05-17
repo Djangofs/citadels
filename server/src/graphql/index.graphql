@@ -1,0 +1,19 @@
+type User {
+  name: String
+}
+
+type Game {
+  name: String
+  playerLimit: Int
+  players: Int
+  ruleset: String
+  open: Boolean
+}
+
+type Query {
+  user: User
+  games: [Game]
+}
+type Mutation {
+  addUser(name: String!): User
+}

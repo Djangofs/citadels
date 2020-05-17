@@ -1,6 +1,6 @@
 {
   "watch": ["src"],
-  "ext": "ts",
+  "ext": "ts,graphql",
   "ignore": ["src/**/*.spec.ts"],
-  "exec": "ts-node ./src/server.ts"
+  "exec": "npm run codegen && ts-node ./src/server.ts"
 }
